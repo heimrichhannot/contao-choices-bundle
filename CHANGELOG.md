@@ -2,7 +2,8 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased ] - 2021-08-06
+## [1.1.0] - 2021-12-02
+- Changed: show placeholder for multiple select filter fields
 - Changed: enhances readme
 
 ## [1.0.0] - 2021-08-05

@@ -98,6 +98,19 @@ class AdjustFilterOptionsEventListener
         $choicesOptions = $this->choicesManager->getOptionsAsArray([], $table, $element->field ?: '');
         $choicesOptions['enable'] = true;
 
+        if ($event->getElement()->addPlaceholder) {
+            if (($options['multiple'] ?? false) === true && ($options['expanded'] ?? false) === false) {
+                $choices = $options['choices'];
+                $choices = array_merge([$options['placeholder'] => ""], $choices);
+                $options['choices'] = $choices;
+            }
+
+            $choicesOptions['placeholder'] = true;
+            if (isset($options['placeholder'])) {
+                $choicesOptions['placeholderValue'] = $options['placeholder'];
+            }
+        }
+
         $customizeChoicesOptionsEvent = new CustomizeChoicesOptionsEvent($choicesOptions, [], null);
         $customizeChoicesOptionsEvent->setAdjustFilterOptionsEvent(clone $event);
         $this->eventDispatcher->dispatch(CustomizeChoicesOptionsEvent::NAME, $customizeChoicesOptionsEvent);
