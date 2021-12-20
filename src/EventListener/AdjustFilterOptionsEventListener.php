@@ -91,8 +91,6 @@ class AdjustFilterOptionsEventListener
                 break;
         }
 
-        $this->frontendAsset->addFrontendAssets();
-
         $options = $event->getOptions();
 
         $choicesOptions = $this->choicesManager->getOptionsAsArray([], $table, $element->field ?: '');
@@ -114,6 +112,10 @@ class AdjustFilterOptionsEventListener
         $customizeChoicesOptionsEvent = new CustomizeChoicesOptionsEvent($choicesOptions, [], null);
         $customizeChoicesOptionsEvent->setAdjustFilterOptionsEvent(clone $event);
         $this->eventDispatcher->dispatch(CustomizeChoicesOptionsEvent::NAME, $customizeChoicesOptionsEvent);
+
+        if ($customizeChoicesOptionsEvent->isChoicesEnabled()) {
+            $this->frontendAsset->addFrontendAssets();
+        }
 
         $options['attr']['data-choices'] = (int) $customizeChoicesOptionsEvent->isChoicesEnabled();
         $options['attr']['data-choices-options'] = json_encode($customizeChoicesOptionsEvent->getChoicesOptions());

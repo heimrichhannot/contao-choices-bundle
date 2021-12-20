@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2021-12-20
+- Fixed: assets not automatically added on dca usage
+- Fixed: assets added to early in on filter bundle usage
+
 ## [1.1.0] - 2021-12-02
 - Changed: show placeholder for multiple select filter fields
 - Changed: enhances readme

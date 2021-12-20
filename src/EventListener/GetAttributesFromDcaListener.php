@@ -121,6 +121,10 @@ class GetAttributesFromDcaListener
 
         $event = $this->eventDispatcher->dispatch(CustomizeChoicesOptionsEvent::NAME, new CustomizeChoicesOptionsEvent($customOptions, $attributes, $dc));
 
+        if ($event->isChoicesEnabled()) {
+            $this->frontendAsset->addFrontendAssets();
+        }
+
         $attributes['data-choices'] = (int) $event->isChoicesEnabled();
         $attributes['data-choices-options'] = json_encode($event->getChoicesOptions());
 
