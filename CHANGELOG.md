@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2022-01-21
+- Changed: added support for formhybrid_ajax_complete event of formhybrid-compatibility-bundle
+
 ## [1.1.1] - 2021-12-20
 - Fixed: assets not automatically added on dca usage
 - Fixed: assets added to early in on filter bundle usage
