@@ -4,12 +4,12 @@
   "description": "This bundle offers support for choices.js for the Contao CMS.",
   "license": "LGPL-3.0-or-later",
   "require": {
-    "php": "^7.1",
+    "php": "^7.1 || ^8.0",
     "ext-json": "*",
     "contao/core-bundle": "^4.4",
     "heimrichhannot/contao-utils-bundle": "^2.196",
-    "psr/container": "^1.0|^2.0",
-    "symfony/dependency-injection": "^3.4|^4.4"
+    "psr/container": "^1.0 || ^2.0",
+    "symfony/dependency-injection": "^3.4 || ^4.4"
   },
   "suggest": {
     "heimrichhannot/contao-encore-bundle": "^1.5 - Manage dependencies with Symfony Webpack Encore."
@@ -21,9 +21,6 @@
     "psr-4": {
       "HeimrichHannot\\ChoicesBundle\\": "src/"
     }
-  },
-  "config": {
-    "preferred-install": "dist"
   },
   "extra": {
     "contao-manager-plugin": "HeimrichHannot\\ChoicesBundle\\ContaoManager\\Plugin",

@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2022-04-14
+- Changed: allow php 8
+- Changed: removed test setup
+
 ## [1.2.0] - 2022-01-21
 - Changed: added support for formhybrid_ajax_complete event of formhybrid-compatibility-bundle
 
