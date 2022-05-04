@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2022-05-04
+- Changed: minimum php version is now 7.4
+- Changed: minimum contao version is now 4.9
+- Fixed: exception with contao 4.13
+
 ## [1.3.0] - 2022-04-14
 - Changed: allow php 8
 - Changed: removed test setup

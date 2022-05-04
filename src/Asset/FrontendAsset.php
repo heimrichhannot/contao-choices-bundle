@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -11,18 +11,12 @@ namespace HeimrichHannot\ChoicesBundle\Asset;
 use HeimrichHannot\EncoreBundle\Asset\FrontendAsset as EncoreFrontendAsset;
 use HeimrichHannot\UtilsBundle\Util\Utils;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
+use Symfony\Contracts\Service\ServiceSubscriberInterface;
 
 class FrontendAsset implements ServiceSubscriberInterface
 {
-    /**
-     * @var Utils
-     */
-    protected $utils;
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
+    protected Utils $utils;
+    private ContainerInterface $container;
 
     /**
      * FrontendAsset constructor.
