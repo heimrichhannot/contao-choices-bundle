@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -10,7 +10,7 @@ namespace HeimrichHannot\ChoicesBundle\Event;
 
 use Contao\DataContainer;
 use HeimrichHannot\FilterBundle\Event\AdjustFilterOptionsEvent;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CustomizeChoicesOptionsEvent extends Event
 {

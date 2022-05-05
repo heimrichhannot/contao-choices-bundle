@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2022-05-05
+- Fixed: symfony 5 compatibility
+
 ## [1.4.0] - 2022-05-04
 - Changed: minimum php version is now 7.4
 - Changed: minimum contao version is now 4.9
