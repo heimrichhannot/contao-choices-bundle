@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -99,11 +99,12 @@ class AdjustFilterOptionsEventListener
         if ($event->getElement()->addPlaceholder) {
             if (($options['multiple'] ?? false) === true && ($options['expanded'] ?? false) === false) {
                 $choices = $options['choices'];
-                $choices = array_merge([$options['placeholder'] => ""], $choices);
+                $choices = array_merge([$options['placeholder'] => ''], $choices);
                 $options['choices'] = $choices;
             }
 
             $choicesOptions['placeholder'] = true;
+
             if (isset($options['placeholder'])) {
                 $choicesOptions['placeholderValue'] = $options['placeholder'];
             }
@@ -111,7 +112,7 @@ class AdjustFilterOptionsEventListener
 
         $customizeChoicesOptionsEvent = new CustomizeChoicesOptionsEvent($choicesOptions, [], null);
         $customizeChoicesOptionsEvent->setAdjustFilterOptionsEvent(clone $event);
-        $this->eventDispatcher->dispatch(CustomizeChoicesOptionsEvent::NAME, $customizeChoicesOptionsEvent);
+        $this->eventDispatcher->dispatch($customizeChoicesOptionsEvent, CustomizeChoicesOptionsEvent::NAME);
 
         if ($customizeChoicesOptionsEvent->isChoicesEnabled()) {
             $this->frontendAsset->addFrontendAssets();
