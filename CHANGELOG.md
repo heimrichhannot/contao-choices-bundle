@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.3] - 2022-08-22
+- Fixed: warning with php 8
+
 ## [1.4.2] - 2022-05-05
 - Fixed: symfony 5 compatibility
 

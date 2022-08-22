@@ -1,13 +1,14 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\ChoicesBundle\DataContainer;
 
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use HeimrichHannot\FilterBundle\Filter\Type\TextConcatType;
 use HeimrichHannot\FilterBundle\Filter\Type\TextType;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -42,7 +43,13 @@ class FilterConfigElementContainer
         }
 
         foreach ($choiceFields as $choiceField) {
-            $dca['palettes'][$choiceField] = str_replace(';{visualization_legend}', ',skipChoicesSupport;{visualization_legend}', $dca['palettes'][$choiceField]);
+            if (empty($dca['palettes'][$choiceField])) {
+                continue;
+            }
+
+            PaletteManipulator::create()
+                ->addField('skipChoicesSupport', 'config_legend', PaletteManipulator::POSITION_APPEND)
+                ->applyToPalette($choiceField, 'tl_filter_config_element');
         }
 
         $fields = [
@@ -51,7 +58,13 @@ class FilterConfigElementContainer
         ];
 
         foreach ($fields as $field) {
-            $dca['palettes'][$field] = str_replace(';{visualization_legend}', ',addChoicesSupport;{visualization_legend}', $dca['palettes'][$field]);
+            if (empty($dca['palettes'][$field])) {
+                continue;
+            }
+
+            PaletteManipulator::create()
+                ->addField('addChoicesSupport', 'config_legend', PaletteManipulator::POSITION_APPEND)
+                ->applyToPalette($field, 'tl_filter_config_element');
         }
     }
 }
