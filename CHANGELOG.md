@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2022-10-17
+- Changed: use encore contracts
+- Changed: updates bundle structure
+- Changed: use hook annotations
+
 ## [1.4.3] - 2022-08-22
 - Fixed: warning with php 8
 

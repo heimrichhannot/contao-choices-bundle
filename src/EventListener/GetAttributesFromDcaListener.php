@@ -8,6 +8,7 @@
 
 namespace HeimrichHannot\ChoicesBundle\EventListener;
 
+use Contao\CoreBundle\ServiceAnnotation\Hook;
 use Contao\DataContainer;
 use Contao\PageModel;
 use HeimrichHannot\ChoicesBundle\Asset\FrontendAsset;
@@ -67,22 +68,10 @@ class GetAttributesFromDcaListener
         $this->modelUtil = $modelUtil;
     }
 
-    public function close()
-    {
-        $this->closed = true;
-    }
-
-    public function open()
-    {
-        $this->closed = false;
-    }
-
     /**
      * @Hook("getAttributesFromDca")
-     *
-     * @param DataContainer $dc
      */
-    public function onGetAttributesFromDca(array $attributes, $dc = null): array
+    public function __invoke(array $attributes, DataContainer $dc = null): array
     {
         if ($this->closed || !$this->utils->container()->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
             $this->open();
@@ -132,6 +121,16 @@ class GetAttributesFromDcaListener
         $attributes['data-choices-options'] = json_encode($event->getChoicesOptions());
 
         return $attributes;
+    }
+
+    public function close()
+    {
+        $this->closed = true;
+    }
+
+    public function open()
+    {
+        $this->closed = false;
     }
 
     protected function getPageWithParents()

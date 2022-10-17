@@ -1,15 +1,19 @@
 <?php
 
 /*
- * Copyright (c) 2021 Heimrich & Hannot GmbH
+ * Copyright (c) 2022 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\ChoicesBundle\EventListener;
 
+use Contao\CoreBundle\ServiceAnnotation\Hook;
 use HeimrichHannot\ChoicesBundle\DataContainer\FilterConfigElementContainer;
 
+/**
+ * @Hook("loadDataContainer")
+ */
 class LoadDataContainerListener
 {
     /**
@@ -25,7 +29,7 @@ class LoadDataContainerListener
         $this->filterConfigElementContainer = $filterConfigElementContainer;
     }
 
-    public function onLoadDataContainer(string $table)
+    public function __invoke(string $table)
     {
         switch ($table) {
             case 'tl_filter_config_element':

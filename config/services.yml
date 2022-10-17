@@ -5,7 +5,7 @@ services:
     autoconfigure: true
 
   HeimrichHannot\ChoicesBundle\:
-    resource: "../../{DataContainer,EventListener,Asset,Manager}/*"
+    resource: "../src/{Asset,DataContainer,EventListener,Manager}/*"
 
   HeimrichHannot\ChoicesBundle\EventListener\AdjustFilterOptionsEventListener:
     public: false
