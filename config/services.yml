@@ -6,8 +6,3 @@ services:
 
   HeimrichHannot\ChoicesBundle\:
     resource: "../src/{Asset,DataContainer,EventListener,Manager}/*"
-
-  HeimrichHannot\ChoicesBundle\EventListener\AdjustFilterOptionsEventListener:
-    public: false
-    tags:
-      - { name: kernel.event_listener, event: huh.filter.event.adjust_filter_options_event, method: onAdjustFilterOptions }

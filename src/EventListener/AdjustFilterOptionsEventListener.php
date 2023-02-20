@@ -1,60 +1,50 @@
 <?php
 
 /*
- * Copyright (c) 2022 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\ChoicesBundle\EventListener;
 
+use Contao\Controller;
 use HeimrichHannot\ChoicesBundle\Asset\FrontendAsset;
 use HeimrichHannot\ChoicesBundle\Event\CustomizeChoicesOptionsEvent;
 use HeimrichHannot\ChoicesBundle\Manager\ChoicesManager;
 use HeimrichHannot\FilterBundle\Event\AdjustFilterOptionsEvent;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class AdjustFilterOptionsEventListener
+class AdjustFilterOptionsEventListener implements EventSubscriberInterface
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-    /**
-     * @var FrontendAsset
-     */
-    private $frontendAsset;
-    /**
-     * @var ChoicesManager
-     */
-    private $choicesManager;
-    /**
-     * @var EventDispatcherInterface
-     */
-    private $eventDispatcher;
+    private FrontendAsset                $frontendAsset;
+    private ChoicesManager               $choicesManager;
+    private EventDispatcherInterface     $eventDispatcher;
+    private GetAttributesFromDcaListener $dcaListener;
+    private ParameterBagInterface        $parameterBag;
 
-    public function __construct(ContainerInterface $container, FrontendAsset $frontendAsset, ChoicesManager $choicesManager, EventDispatcherInterface $eventDispatcher)
+    public function __construct(FrontendAsset $frontendAsset, ChoicesManager $choicesManager, EventDispatcherInterface $eventDispatcher, GetAttributesFromDcaListener $dcaListener, ParameterBagInterface $parameterBag)
     {
-        $this->container = $container;
         $this->frontendAsset = $frontendAsset;
         $this->choicesManager = $choicesManager;
         $this->eventDispatcher = $eventDispatcher;
+        $this->dcaListener = $dcaListener;
+        $this->parameterBag = $parameterBag;
     }
 
     public function onAdjustFilterOptions(AdjustFilterOptionsEvent $event)
     {
-        $this->container->get(GetAttributesFromDcaListener::class)->close();
+        $this->dcaListener->close();
         $filter = $event->getConfig()->getFilter();
         $table = $filter['dataContainer'];
 
-        $this->container->get('huh.utils.dca')->loadDc($table);
-
-        $dca = &$GLOBALS['TL_DCA'][$table];
+        Controller::loadDataContainer($table);
 
         $element = $event->getElement();
 
-        $config = $this->container->getParameter('huh.filter');
+        $config = $this->parameterBag->has('huh.filter') ? $this->parameterBag->get('huh.filter') : [];
 
         if (!isset($config['filter']['types'])) {
             return;
@@ -122,5 +112,16 @@ class AdjustFilterOptionsEventListener
         $options['attr']['data-choices-options'] = json_encode($customizeChoicesOptionsEvent->getChoicesOptions());
 
         $event->setOptions($options);
+    }
+
+    public static function getSubscribedEvents(): array
+    {
+        if (class_exists(AdjustFilterOptionsEvent::class)) {
+            return [
+                AdjustFilterOptionsEvent::NAME => 'onAdjustFilterOptions',
+            ];
+        }
+
+        return [];
     }
 }
