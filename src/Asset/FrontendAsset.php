@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2022 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -30,10 +30,14 @@ class FrontendAsset implements ServiceSubscriberInterface
     {
         if ($this->utils->container()->isFrontend()) {
             $this->addPageEntrypoint('contao-choices-bundle', [
-                'TL_CSS' => ['contao-choices-bundle' => 'bundles/heimrichhannotcontaochoices/assets/choices.css|static'],
                 'TL_JAVASCRIPT' => [
                     'contao-choices-bundle--library' => 'bundles/heimrichhannotcontaochoices/assets/choices.js|static',
                     'contao-choices-bundle' => 'bundles/heimrichhannotcontaochoices/assets/contao-choices-bundle.js|static',
+                ],
+            ]);
+            $this->addPageEntrypoint('contao-choices-bundle-theme', [
+                'TL_CSS' => [
+                    'contao-choices-bundle' => 'bundles/heimrichhannotcontaochoices/assets/choices.css|static',
                 ],
             ]);
         }

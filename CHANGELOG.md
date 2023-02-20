@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2023-02-20
+- Changed: enhanced code quality
+- Fixed: missing theme entry in FrontendAsset
+- Fixed: deprecation warning in Contao Manager Plugin
+
 ## [1.5.0] - 2022-10-17
 - Changed: use encore contracts
 - Changed: updates bundle structure
