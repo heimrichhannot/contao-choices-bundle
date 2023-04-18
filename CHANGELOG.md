@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.2] - 2023-04-18
+- Fixed: invalid parameter type
+
 ## [1.5.1] - 2023-02-20
 - Changed: enhanced code quality
 - Fixed: missing theme entry in FrontendAsset

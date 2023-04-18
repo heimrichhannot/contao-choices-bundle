@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2022 Heimrich & Hannot GmbH
+ * Copyright (c) 2023 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0-or-later
  */
@@ -9,7 +9,6 @@
 namespace HeimrichHannot\ChoicesBundle\EventListener;
 
 use Contao\CoreBundle\ServiceAnnotation\Hook;
-use Contao\DataContainer;
 use Contao\PageModel;
 use HeimrichHannot\ChoicesBundle\Asset\FrontendAsset;
 use HeimrichHannot\ChoicesBundle\Event\CustomizeChoicesOptionsEvent;
@@ -71,7 +70,7 @@ class GetAttributesFromDcaListener
     /**
      * @Hook("getAttributesFromDca")
      */
-    public function __invoke(array $attributes, DataContainer $dc = null): array
+    public function __invoke(array $attributes, $context = null): array
     {
         if ($this->closed || !$this->utils->container()->isFrontend() || !\in_array($attributes['type'], ['select', 'text'])) {
             $this->open();
@@ -109,7 +108,7 @@ class GetAttributesFromDcaListener
         }
 
         $event = $this->eventDispatcher->dispatch(
-            new CustomizeChoicesOptionsEvent($customOptions, $attributes, $dc),
+            new CustomizeChoicesOptionsEvent($customOptions, $attributes, $context),
             CustomizeChoicesOptionsEvent::NAME
         );
 
