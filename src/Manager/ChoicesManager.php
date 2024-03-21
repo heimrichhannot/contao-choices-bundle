@@ -9,9 +9,17 @@
 namespace HeimrichHannot\ChoicesBundle\Manager;
 
 use Contao\Controller;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ChoicesManager
 {
+    private TranslatorInterface $translator;
+
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function getOptionsFromDca(string $table, string $field): array
     {
         Controller::loadDataContainer($table);
@@ -40,12 +48,12 @@ class ChoicesManager
     public function getDefaultOptions(): array
     {
         return [
-            'loadingText' => $GLOBALS['TL_LANG']['MSC']['choices.js']['loadingText'],
-            'noResultsText' => $GLOBALS['TL_LANG']['MSC']['choices.js']['noResultsText'],
-            'noChoicesText' => $GLOBALS['TL_LANG']['MSC']['choices.js']['noChoicesText'],
-            'itemSelectText' => $GLOBALS['TL_LANG']['MSC']['choices.js']['itemSelectText'],
-            'addItemTextString' => $GLOBALS['TL_LANG']['MSC']['choices.js']['addItemText'],
-            'maxItemTextString' => $GLOBALS['TL_LANG']['MSC']['choices.js']['maxItemText'],
+            'loadingText' => $this->translator->trans('MSC.choices\.js.loadingText', [], 'contao_default'),
+            'noResultsText' => $this->translator->trans('MSC.choices\.js.noResultsText', [], 'contao_default'),
+            'noChoicesText' => $this->translator->trans('MSC.choices\.js.noChoicesText', [], 'contao_default'),
+            'itemSelectText' => $this->translator->trans('MSC.choices\.js.itemSelectText', [], 'contao_default'),
+            'addItemTextString' => $this->translator->trans('MSC.choices\.js.addItemText', [], 'contao_default'),
+            'maxItemTextString' => $this->translator->trans('MSC.choices\.js.maxItemText', [], 'contao_default'),
             'shouldSort' => false,
         ];
     }
