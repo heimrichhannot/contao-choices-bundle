@@ -25,7 +25,7 @@ class FilterConfigElementContainer
         $this->container = $container;
     }
 
-    public function addChoicesFieldToTypePalettes(array &$dca)
+    public function addChoicesFieldToTypePalettes(array &$dca): void
     {
         $config = $this->container->getParameter('huh.filter');
 

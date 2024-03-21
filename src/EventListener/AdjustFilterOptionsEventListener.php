@@ -34,7 +34,7 @@ class AdjustFilterOptionsEventListener implements EventSubscriberInterface
         $this->parameterBag = $parameterBag;
     }
 
-    public function onAdjustFilterOptions(AdjustFilterOptionsEvent $event)
+    public function onAdjustFilterOptions(AdjustFilterOptionsEvent $event): void
     {
         $this->dcaListener->close();
         $filter = $event->getConfig()->getFilter();

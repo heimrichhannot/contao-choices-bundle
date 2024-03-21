@@ -14,7 +14,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class CustomizeChoicesOptionsEvent extends Event
 {
-    const NAME = 'huh.choices.customize_choices_options';
+    public const NAME = 'huh.choices.customize_choices_options';
     /**
      * @var AdjustFilterOptionsEvent
      */
@@ -50,7 +50,7 @@ class CustomizeChoicesOptionsEvent extends Event
         $this->dc = $dc;
     }
 
-    public function setAdjustFilterOptionsEvent(AdjustFilterOptionsEvent $adjustFilterOptionsEvent)
+    public function setAdjustFilterOptionsEvent(AdjustFilterOptionsEvent $adjustFilterOptionsEvent): void
     {
         $this->adjustFilterOptionsEvent = $adjustFilterOptionsEvent;
     }

@@ -29,7 +29,7 @@ class LoadDataContainerListener
         $this->filterConfigElementContainer = $filterConfigElementContainer;
     }
 
-    public function __invoke(string $table)
+    public function __invoke(string $table): void
     {
         switch ($table) {
             case 'tl_filter_config_element':

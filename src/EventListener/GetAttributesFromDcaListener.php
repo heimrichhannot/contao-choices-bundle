@@ -122,12 +122,12 @@ class GetAttributesFromDcaListener
         return $attributes;
     }
 
-    public function close()
+    public function close(): void
     {
         $this->closed = true;
     }
 
-    public function open()
+    public function open(): void
     {
         $this->closed = false;
     }
