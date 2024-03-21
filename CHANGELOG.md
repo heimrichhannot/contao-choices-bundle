@@ -2,6 +2,9 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.5.3] - 2024-03-21
+- Fixed: warnings with php 8
+
 ## [1.5.2] - 2023-04-18
 - Fixed: invalid parameter type
 
